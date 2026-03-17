@@ -8,8 +8,8 @@ Install Windows Server and Windows 10 iso files online lol. When VirtualBox is c
 
 <table style="width:100%">
   <tr>
-    <td><img src="AD-Lab-Screenshots/PolicyActive1.png" alt="User Creation" width="100%"></td>
-    <td><img src="AD-Lab-Screenshots/PolicyActive2.png" alt="Policy Definition" width="100%"></td>
+    <td><img src="AD-Lab-Screenshots/vmsetup1.png" alt="User Creation" width="100%"></td>
+    <td><img src="AD-Lab-Screenshots/vmsetup2.png" alt="Policy Definition" width="100%"></td>
   </tr>
 </table>
 
