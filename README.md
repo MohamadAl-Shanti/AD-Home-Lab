@@ -1,6 +1,9 @@
 # AD-Home-Lab
 This lab simulates a small enterprise Active Directory environment where users, organizational units, and group policies are managed using PowerShell. This details the implementation of my Active Directory home lab, further details and screen captures can be found in the screenshots folder. I Deployed Windows 10 and Windows Server virtual machines on Oracle VirtualBox using ISO installation images.
 <br>
+
+## Virtual Machine Setup
+
 ## Domain Controller Configuration
 I configured the domain controller on Windows Server as follows: 
   
