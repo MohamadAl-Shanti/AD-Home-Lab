@@ -3,6 +3,16 @@ This lab simulates a small enterprise Active Directory environment where users, 
 <br>
 
 ## Virtual Machine Setup
+You can install VirtualBox here: https://www.virtualbox.org/wiki/Downloads
+Install Windows Server and Windows 10 iso files online lol. When VirtualBox is configured; open VirtualBox, select the new option, select your iso file and destination folder, name your machine, and select finish:
+
+<table style="width:100%">
+  <tr>
+    <td><img src="AD-Lab-Screenshots/PolicyActive1.png" alt="User Creation" width="100%"></td>
+    <td><img src="AD-Lab-Screenshots/PolicyActive2.png" alt="Policy Definition" width="100%"></td>
+  </tr>
+</table>
+
 
 ## Domain Controller Configuration
 I configured the domain controller on Windows Server as follows: 
