@@ -14,7 +14,8 @@ Install Windows Server and Windows 10 iso files online lol. When VirtualBox is c
 </table>
 
 ## Active Directory Installation
-The following command should be used to install Active Directory
+The following command should be used to install Active Directory and its services.
+> ![usercreation](AD-Lab-Screenshots/AD1_InstallADServices.png)
 
 
 ## Domain Controller Configuration
