@@ -13,6 +13,9 @@ Install Windows Server and Windows 10 iso files online lol. When VirtualBox is c
   </tr>
 </table>
 
+## Active Directory Installation
+The following command should be used to install Active Directory
+
 
 ## Domain Controller Configuration
 I configured the domain controller on Windows Server as follows: 
