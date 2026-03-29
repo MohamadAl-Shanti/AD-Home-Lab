@@ -17,11 +17,10 @@ Install Windows Server and Windows 10 iso files online lol. When VirtualBox is c
 The following command should be used to install Active Directory and its services.
 > ![usercreation](AD-Lab-Screenshots/AD1_InstallADServices.png)
 
-
 ## Domain Controller Configuration
 I configured the domain controller on Windows Server as follows: 
-  
-  * Domain name - lab.local
+  * **_Domain name - lab.local_** <br>
+  > ![usercreation](AD-Lab-Screenshots/AD_Domain_Naming_and_Updated_Packages.png) <br> This command is used to configure your domain as a forest. Your machine is no longer viewed as a standalone server but rather the domain controller in a hierarchy of servers.
   * Computer name - ITDOMAINCONT
   * Network adapter address - 172.16.0.1 (private IPv4 address commonly used in internal LAN environments)
   * Preferred DNS Server - 127.0.0.1 (Loopback address)
