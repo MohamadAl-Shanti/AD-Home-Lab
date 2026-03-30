@@ -18,13 +18,22 @@ The majority of this lab's setup will refer to numbers on the SConfig screen, an
 > ![usercreation](AD-Lab-Screenshots/sconfig_screen.png)
 > ![usercreation](AD-Lab-Screenshots/AdminList&PassChange.png) <br>
 
-'''powershell
+```powershell
 Get-ADGroupMember -Identity "Domain Admins" | Select-Object Name, SamAccountName
-''' 
-
+``` 
+```powershell
+$password = Read-Host "Enter new password" AsSecureString
+```
+```powershell
+Set-ADAccountPassword -Identity "Administrator" -NewPassword $password -Reset
+```
 ## Active Directory Installation
 The following command should be used to install Active Directory and its services.
 > ![usercreation](AD-Lab-Screenshots/AD1_InstallADServices.png)
+
+```powershell
+Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
+```
 
 ## Domain Controller Configuration
 I configured the domain controller on Windows Server as follows: 
@@ -32,7 +41,15 @@ I configured the domain controller on Windows Server as follows:
   * **_Remote Desktop: Enabled_** - (SConfig - 7) Enter 'E' to enable remote desktop. Select the more secure option. Setting this is best practice for 
 system administration. Enabling Remote Desktop allows you to log into the domain controller and perform administrative tasks from Windows client machines.
   * **_Domain name - lab.local_** <br>
-  > ![usercreation](AD-Lab-Screenshots/AD_Domain_Naming_and_Updated_Packages.png) <br> This command is used to configure your domain as a forest. Your machine is no longer viewed as a standalone server but rather the domain controller in a hierarchy of servers.
+  > ![usercreation](AD-Lab-Screenshots/AD_Domain_Naming_and_Updated_Packages.png)
+
+```powershell
+Install-ADDSForest -DomainName "lab.local" -ForestMode WinThreshold -DomainMode WinThreshold -InstallDNS:$true -Force
+```
+
+This command is used to configure your domain as a forest with lab.local as the root domain. Your machine is no longer viewed as a standalone server, it is promoted to be the domain controller in a hierarchy of servers. This foundation allows for the future expansion into child domains such as dev.lab.local or marketing.lab.local to create a multi-domain tree. WinThreshold is not strictly necessary. It sets the domain's functional level to Windows Server 2016, i.e., no feature incompatible with Windows Server 2016 or newer will be used. InstallDNS:$true installs the DNS server role, allowing you to configure your domain controller as a DNS server.
+
+
 
   You can now select 1 on the SConfig screen, and join the created domain as follows:
   > ![usercreation](AD-Lab-Screenshots/domain_change.png)
