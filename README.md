@@ -42,10 +42,16 @@ The preferred DNS server will have been set to the loopback address during the i
 
 Select 1 on the Network Adapter Settings to set the Network adapter address.
 
-  > ![usercreation](AD-Lab-Screenshots/network_adapter_settings_filled.png)
-  172.16.0.1 (private IPv4 address commonly used in internal LAN environments)
-  * Preferred DNS Server - 127.0.0.1 (Loopback address)
-  * Alternate DNS Server - Blank
+  > ![usercreation](AD-Lab-Screenshots/network_adapter_settings_filled2.png)
+
+First select Static IP address. Since this is the domain controller it is required that it be at a fixed IP address since it is a point of reference for the entire network. It is recommended that you use 172.16.0.1 for your static IP address. This is a private IPv4 address that is commonly used in internal LAN environments. You may leave the subnet mask and the default gateway blank.
+
+I have found that the new IP address often does not stick, and that it is better to manually change it via PowerShell. If this is the case for you, refer to this commands to update it:
+
+  > ![usercreation](AD-Lab-Screenshots/ipmanual.png)
+
+
+
   * Update Setting: Manual
   * Remote Desktop: Enabled
 
