@@ -20,7 +20,9 @@ The majority of this lab's setup will refer to numbers on the SConfig screen, an
 
 ```powershell
 Get-ADGroupMember -Identity "Domain Admins" | Select-Object Name, SamAccountName
-``` 
+```
+Ensure the following two commands are run in the same session to preserve the $password variable
+
 ```powershell
 $password = Read-Host "Enter new password" AsSecureString
 ```
