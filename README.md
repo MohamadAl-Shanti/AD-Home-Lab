@@ -70,9 +70,20 @@ Select 1 on the Network Adapter Settings to set the Network adapter address.
 
 First select Static IP address. Since this is the domain controller it is required that it be at a fixed IP address since it is a point of reference for the entire network. It is recommended that you use 172.16.0.1 for your static IP address. This is a private IPv4 address that is commonly used in internal LAN environments. You may leave the subnet mask and the default gateway blank. Leaving the subnet mask blank defaults to 255.255.255.0, defining the boundary of your network to 172.16.0.1
 
-I have found that the new IP address often does not stick, and that it is better to manually change it via PowerShell. If this is the case for you, refer to this commands to update it:
+I have found that the new IP address often does not stick, and that it is better to manually change it via PowerShell. If this is the case for you, you can change the static IP manually via PowerShell with the following commands:
 
   > ![usercreation](AD-Lab-Screenshots/ipmanual.png)
+
+First get the correct Interface Alias: 
+```powershell
+Get-NetAdapter
+```
+
+This command will update to the desired IP:
+
+```powershell
+New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 172.16.0.1 -PrefixLength 24
+```
 
 This change should now be reflected in the Network Settings (8 on SConfig)
 
