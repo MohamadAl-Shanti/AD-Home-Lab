@@ -26,7 +26,12 @@ The following command should be used to install Active Directory and its service
 I configured the domain controller on Windows Server as follows: 
   * **_Domain name - lab.local_** <br>
   > ![usercreation](AD-Lab-Screenshots/AD_Domain_Naming_and_Updated_Packages.png) <br> This command is used to configure your domain as a forest. Your machine is no longer viewed as a standalone server but rather the domain controller in a hierarchy of servers.
-  * Computer name - ITDOMAINCONT
+
+  You can now select 1 on the SConfig screen, and join the created domain as follows:
+  > ![usercreation](AD-Lab-Screenshots/domain_change.png)
+  * **_Computer name - ITDomainCont_**
+  Select 2 on SConfig and change the computer name as follows:
+  > ![usercreation](AD-Lab-Screenshots/image.png)
   * Network adapter address - 172.16.0.1 (private IPv4 address commonly used in internal LAN environments)
   * Preferred DNS Server - 127.0.0.1 (Loopback address)
   * Alternate DNS Server - Blank
