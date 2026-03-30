@@ -13,7 +13,7 @@ Install Windows Server and Windows 10 iso files online lol. When VirtualBox is c
   </tr>
 </table>
 
-## Easy Password Reset and SConfig screen Reference
+## Useful Reference Images
 The majority of this lab's setup will refer to numbers on the SConfig screen, and there are steps throughout that will require you to authenticate via an authorized/administrator account. Feel free to refer to these images to make your life easier.
 > ![usercreation](AD-Lab-Screenshots/sconfig_screen.png)
 > ![usercreation](AD-Lab-Screenshots/AdminList&PassChange.png) <br> Three commands; List authorized accounts, create secure string for new password, set administrator account with the new password.
