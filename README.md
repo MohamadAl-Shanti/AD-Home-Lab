@@ -32,7 +32,11 @@ I configured the domain controller on Windows Server as follows:
   * **_Computer name - ITDomainCont_**
   Select 2 on SConfig and change the computer name as follows:
   > ![usercreation](AD-Lab-Screenshots/image.png)
-  * Network adapter address - 172.16.0.1 (private IPv4 address commonly used in internal LAN environments)
+  * **_Network Adapter Address & Preferred DNS Server_**
+    Select 8 on SConfig to configure the network addresses. There should be one network adapter present in the Network Settings, type 1 to select this adapter.
+  > ![usercreation](AD-Lab-Screenshots/network_settings1.png) 
+
+    172.16.0.1 (private IPv4 address commonly used in internal LAN environments)
   * Preferred DNS Server - 127.0.0.1 (Loopback address)
   * Alternate DNS Server - Blank
   * Update Setting: Manual
