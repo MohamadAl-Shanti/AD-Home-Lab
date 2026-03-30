@@ -24,6 +24,9 @@ The following command should be used to install Active Directory and its service
 
 ## Domain Controller Configuration
 I configured the domain controller on Windows Server as follows: 
+  * **_Update Setting: Manual_** - (SConfig - 5) Enter 'M' to set updates to manual. This will prevent Windows Server from updating and rebooting while you are halfway through your configuration.
+  * **_Remote Desktop: Enabled_** - (SConfig - 7) Enter 'E' to enable remote desktop. Select the more secure option. Setting this is best practice for 
+system administration. Enabling Remote Desktop allows you to log into the domain controller and perform administrative tasks from Windows client machines.
   * **_Domain name - lab.local_** <br>
   > ![usercreation](AD-Lab-Screenshots/AD_Domain_Naming_and_Updated_Packages.png) <br> This command is used to configure your domain as a forest. Your machine is no longer viewed as a standalone server but rather the domain controller in a hierarchy of servers.
 
@@ -44,16 +47,15 @@ Select 1 on the Network Adapter Settings to set the Network adapter address.
 
   > ![usercreation](AD-Lab-Screenshots/network_adapter_settings_filled2.png)
 
-First select Static IP address. Since this is the domain controller it is required that it be at a fixed IP address since it is a point of reference for the entire network. It is recommended that you use 172.16.0.1 for your static IP address. This is a private IPv4 address that is commonly used in internal LAN environments. You may leave the subnet mask and the default gateway blank.
+First select Static IP address. Since this is the domain controller it is required that it be at a fixed IP address since it is a point of reference for the entire network. It is recommended that you use 172.16.0.1 for your static IP address. This is a private IPv4 address that is commonly used in internal LAN environments. You may leave the subnet mask and the default gateway blank. Leaving the subnet mask blank defaults to 255.255.255.0, defining the boundary of your network to 172.16.0.1
 
 I have found that the new IP address often does not stick, and that it is better to manually change it via PowerShell. If this is the case for you, refer to this commands to update it:
 
   > ![usercreation](AD-Lab-Screenshots/ipmanual.png)
 
+This change should now be reflected in the Network Settings (8 on SConfig)
 
-
-  * Update Setting: Manual
-  * Remote Desktop: Enabled
+  > ![usercreation](AD-Lab-Screenshots/network_confirmation.png)
 
 ## Organizational Unit Creation
 Upon configuring the domain controller, I created an organizational unit to organize accounts:
