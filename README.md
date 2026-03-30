@@ -38,8 +38,11 @@ I configured the domain controller on Windows Server as follows:
 
 The preferred DNS server will have been set to the loopback address during the installation of ADDSForest. This is what we want, as our domain controller acts as the DNS server for our entire network.
 
-  > ![usercreation](AD-Lab-Screenshots/network_adapter_settings.png) 
+  > ![usercreation](AD-Lab-Screenshots/network_adapter_settings.png)
 
+Select 1 on the Network Adapter Settings to set the Network adapter address.
+
+  > ![usercreation](AD-Lab-Screenshots/network_adapter_settings_filled.png)
   172.16.0.1 (private IPv4 address commonly used in internal LAN environments)
   * Preferred DNS Server - 127.0.0.1 (Loopback address)
   * Alternate DNS Server - Blank
