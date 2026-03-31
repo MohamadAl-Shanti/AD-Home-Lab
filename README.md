@@ -2,10 +2,13 @@
 This lab simulates a small enterprise Active Directory environment where users, organizational units, and group policies are managed using PowerShell. This details the implementation of my Active Directory home lab, further details and screen captures can be found in the screenshots folder. I Deployed Windows 10 and Windows Server virtual machines on Oracle VirtualBox using ISO installation images.
 <br>
 
-## Virtual Machine Setup
+## Virtual Box Setup
 You can install VirtualBox here: https://www.virtualbox.org/wiki/Downloads
-Install Windows Server and Windows 10 iso files online lol. When VirtualBox is configured; open VirtualBox, select the new option, select your iso file and destination folder, name your machine, and select finish:
 
+## Virtual Machine Setup
+This home lab will make use of two virtual machines. 
+1. **Windows Server 2022** - This is where you will configure your domain controller. The domain controller in an Active Directory environment is the central authority responsible for all administrative tasks such as user account provisioning and policy implementation. 
+2. **Windows 10** - This machine will be used to log into provisioned user accounts. Its primary purpose in this lab will be to verify that implemented policies are active and functional.
 <table style="width:100%">
   <tr>
     <td><img src="AD-Lab-Screenshots/vmsetup1.png" alt="User Creation" width="100%"></td>
