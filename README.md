@@ -9,7 +9,7 @@ The installation is relatively straightforward, just select the exe for your ope
 ## Virtual Machine Setup
 This home lab will make use of two virtual machines. 
 1. **Windows Server 2022** - This is where you will configure your domain controller. The domain controller in an Active Directory environment is the central authority responsible for all administrative tasks such as user account provisioning and policy implementation. 
-2. **Windows 10** - This machine will be used to log into provisioned user accounts. Its primary purpose in this lab will be to verify that implemented policies are active and functional.
+2. **Windows 10** - This machine will be used to log into provisioned user accounts. Its primary purpose in this lab will be to verify the connection of a client to the lab domain and that implemented policies are active and functional.
 <table style="width:100%">
   <tr>
     <td><img src="AD-Lab-Screenshots/vmsetup1.png" alt="User Creation" width="100%"></td>
@@ -53,7 +53,7 @@ system administration. Enabling Remote Desktop allows you to log into the domain
 Install-ADDSForest -DomainName "lab.local" -ForestMode WinThreshold -DomainMode WinThreshold -InstallDNS:$true -Force
 ```
 
-This command is used to configure your domain as a forest with lab.local as the root domain. Your machine is no longer viewed as a standalone server, it is promoted to be the domain controller in a hierarchy of servers. This foundation allows for the future expansion into child domains such as dev.lab.local or marketing.lab.local to create a multi-domain tree. WinThreshold is not strictly necessary. It sets the domain's functional level to Windows Server 2016, i.e., no feature incompatible with Windows Server 2016 or newer will be used. InstallDNS:$true installs the DNS server role, allowing you to configure your domain controller as a DNS server.
+This command is used to configure your domain as a forest with lab.local as the root domain. Your machine is no longer viewed as a standalone server, it is promoted to be the domain controller in a hierarchy of servers. This foundation allows for the future expansion into child domains such as dev.lab.local or marketing.lab.local to create a multi-domain tree. WinThreshold is not strictly necessary. It sets the domain's functional level to Windows Server 2016 ensuring that no feature incompatible with Windows Server 2016 or newer will be used. InstallDNS:$true installs the DNS server role, allowing you to configure your domain controller as a DNS server.
 
 
 
