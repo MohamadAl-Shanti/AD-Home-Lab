@@ -3,7 +3,8 @@ This lab simulates a small enterprise Active Directory environment where users, 
 <br>
 
 ## Virtual Box Setup
-You can install VirtualBox here: https://www.virtualbox.org/wiki/Downloads
+You can install VirtualBox here: https://www.virtualbox.org/wiki/Downloads <br>
+The installation is relatively straightforward, just select the exe for your operating system and follow the setup instructions provided.
 
 ## Virtual Machine Setup
 This home lab will make use of two virtual machines. 
