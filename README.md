@@ -13,7 +13,7 @@ This home lab will make use of two virtual machines.
 
 When VirtualBox and both ISO images are installed you can set up your virtual machines. Select _New_, name your VM, navigate to and select the ISO image, and choose a destination folder for your VM, _ex/ \labvms_. Ensure that Unattended install is **unselected** as it is often cause for bugs when setting up your OS in the VM. When both VMs are created, boot them up, verify that they work, and complete the OS installation for each. 
 
-_walk through the actual setup of both, maybe a couple screenshots for each, note how adapter 1 for each should be on the internal labnet network, and that you use a second adapter on the DC to allow for internet access. Walk through the process of connecting the client machine to the dc after configuring the dc and dns, then granting the windows 10 client internet access through the dc. This is arguably the most important part of this lab._
+Starting with the Windows 10 machine. Right click the machine in VirtualBox, navigate to Settings > Network. Under _Attached to_ select _Internal Network_. Name the internal network what you like and leave the rest of the settings as they are. Perform the same with the Windows Server VM, then select Adapter 2 and under _Attached to_ select _NAT_, all other settings can remain default. 
 <table style="width:100%">
   <tr>
     <td><img src="AD-Lab-Screenshots/vmsetup1.png" alt="User Creation" width="100%"></td>
@@ -98,6 +98,10 @@ New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 172.16.0.1 -PrefixLength 
 This change should now be reflected in the Network Settings (8 on SConfig)
 
   > ![usercreation](AD-Lab-Screenshots/network_confirmation.png)
+
+## Connecting your Client Machine to your Domain Controller
+
+_Walk through the process of connecting the client machine to the dc after configuring the dc and dns, then granting the windows 10 client internet access through the dc. This is arguably the most important part of this lab._
 
 ## Organizational Unit Creation
 Upon configuring the domain controller, I created an organizational unit to organize accounts:
