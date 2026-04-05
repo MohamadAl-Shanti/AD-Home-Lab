@@ -11,7 +11,7 @@ This home lab will make use of two virtual machines.
 1. **Windows Server 2022** - This is where you will configure your domain controller. The domain controller in an Active Directory environment is the central authority responsible for all administrative tasks such as user account provisioning and policy implementation. The ISO installation image for Windows Server can be found at https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022
 2. **Windows 10** - This machine will be used to log into provisioned user accounts. Its primary purpose in this lab will be to verify the connection of a client to the lab domain and that implemented policies are active and functional. The ISO installation image for Windows 10 can be found at https://www.microsoft.com/en-ca/software-download/windows10. Select _Download Now_ under _Create Windows 10 Installation Media_, then follow the installation steps and to create and ISO which will be used to set up our virtual machine.
 
-When VirtualBox and both ISO images are installed you can set up your virtual machines. Select _New_, name your VM, navigate to and select the ISO image, and choose a destination folder for your VM, _ex/ \labvms_. Ensure that Unattended install is **unselected** as it is often cause for bugs when setting up your OS in the VM. When both VMs are created, boot them up, verify that they work, and complete the OS installation for each. 
+When VirtualBox and both ISO images are installed you can set up your virtual machines. Select _New_, name your VM, navigate to and select the ISO image, and choose a destination folder for your VM, _ex/ \labvms_. Ensure that Unattended install is **unselected** as it is often cause for bugs when setting up your OS in the VM. When both VMs are created, boot them up, verify that they work, and complete the OS installation for each. When you are installing Windows 10 in VirtualBox **MAKE SURE YOU SELECT WINDOWS 10 PRO** otherwise you will not be able to join any domains.
 
 Starting with the Windows 10 machine. Right click the machine in VirtualBox, navigate to Settings > Network. Under _Attached to_ select _Internal Network_. Name the internal network what you like and leave the rest of the settings as they are. Perform the same with the Windows Server VM, then select Adapter 2 and under _Attached to_ select _NAT_, all other settings can remain default. 
 <table style="width:100%">
@@ -101,15 +101,19 @@ This change should now be reflected in the Network Settings (8 on SConfig)
 
 ## Connecting your Client Machine to your Domain Controller
 
-Now that we have configured our domain controller, we need to connect our client machine to it. Log into the Windows 10 machine, navigate to _Network Status_ > _Change adapter options_ > _Ethernet_ > _Properties_. Select _Internet Protocol Version 4 (TCP/IPv4)_ and properties. Then configure __ as follows: 
-_Walk through the process of connecting the client machine to the dc after configuring the dc and dns, then granting the windows 10 client internet access through the dc. This is arguably the most important part of this lab._
+Before we attemotNow that we have configured our domain controller, we need to join the domain we created with our Windows client. Log into the Windows 10 machine, navigate to _Network Status_ > _Change adapter options_ > _Ethernet_ > _Properties_. Select _Internet Protocol Version 4 (TCP/IPv4)_ and properties. Then configure _IP Address, Subnet Mask, and Preferred DNS Server_ as follows: 
 
-## Organizational Unit Creation
-Upon configuring the domain controller, I created an organizational unit to organize accounts:
+  > ![usercreation](AD-Lab-Screenshots/settingDNSforclient.png)
+  
+  > IP address can be set to any IP in your range other than that of your DNS server, another option might be 172.16.0.102.
+  
+  > The preferred DNS server must point directly to the DC since it is the DNS server for the entire network.
 
-    New-ADOrganizationalUnit 
-    -Name "Users" 
-    -Path "DC=lab,DC=local"
+Search for This PC and select properties. Scroll down and select _Rename this PC (advanced)_. Select _change_ and set the domain to the name of the domain you previously created via the domain controller (ex/ lab.local). With this you should have successfully joined the correct domain. You will be prompted to restart the computer to apply these changes.
+
+  > ![usercreation](AD-Lab-Screenshots/joindomainfinally.png)
+
+We will further validate that our joining of the domain was successful in the following section.
 
 ## User Account Creation
 User accounts were created in PowerShell. Passwords were stored as secure strings.
@@ -130,9 +134,16 @@ Example user creation command:
 
 > ![usercreation](AD-Lab-Screenshots/pass%26usercreation.PNG)
 
-A user account provisioned here can be used to log into a Windows Client device with the selected credentials:
+If your join of your lab domain was successful, then you can log into your client machine with the credentials of any account provisioned.
 
 > ![usercreation](AD-Lab-Screenshots/GPOUserLoginClient.png)
+
+## Organizational Unit Creation
+Upon configuring the domain controller, I created an organizational unit to organize accounts:
+
+    New-ADOrganizationalUnit 
+    -Name "Users" 
+    -Path "DC=lab,DC=local"
 
 ## Group Policy Implementation:
 Group policies were created and linked to organizational units to control user behaviour.
