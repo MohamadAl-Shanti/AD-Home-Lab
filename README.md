@@ -8,8 +8,8 @@ The installation is relatively straightforward, just select the exe for your ope
 
 ## Virtual Machine Setup
 This home lab will make use of two virtual machines. 
-1. **Windows Server 2022** - This is where you will configure your domain controller. The domain controller in an Active Directory environment is the central authority responsible for all administrative tasks such as user account provisioning and policy implementation. 
-2. **Windows 10** - This machine will be used to log into provisioned user accounts. Its primary purpose in this lab will be to verify the connection of a client to the lab domain and that implemented policies are active and functional.
+1. **Windows Server 2022** - This is where you will configure your domain controller. The domain controller in an Active Directory environment is the central authority responsible for all administrative tasks such as user account provisioning and policy implementation. The ISO installation image for Windows Server can be found at https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022
+2. **Windows 10** - This machine will be used to log into provisioned user accounts. Its primary purpose in this lab will be to verify the connection of a client to the lab domain and that implemented policies are active and functional. The ISO installation image for Windows 10 can be found at https://www.microsoft.com/en-ca/software-download/windows10. Select _Download Now_ under _Create Windows 10 Installation Media_, then follow the installation steps and to create and ISO which will be used to set up our virtual machine.
 
 _walk through the actual setup of both, maybe a couple screenshots for each, note how adapter 1 for each should be on the internal labnet network, and that you use a second adapter on the DC to allow for internet access. Walk through the process of connecting the client machine to the dc after configuring the dc and dns, then granting the windows 10 client internet access through the dc. This is arguably the most important part of this lab._
 <table style="width:100%">
