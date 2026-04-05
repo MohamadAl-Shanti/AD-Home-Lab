@@ -1,5 +1,5 @@
 # AD-Home-Lab
-This lab simulates a small enterprise Active Directory environment where users, organizational units, and group policies are managed using PowerShell. This details the implementation of my Active Directory home lab, further details and screen captures can be found in the screenshots folder. I Deployed Windows 10 and Windows Server virtual machines on Oracle VirtualBox using ISO installation images.
+This lab simulates a small enterprise Active Directory environment where users, organizational units, and group policies are managed using PowerShell. This details the implementation of my Active Directory home lab, further details and screen captures can be found in the screenshots folder. I deployed Windows 10 and Windows Server virtual machines on Oracle VirtualBox using ISO installation images.
 <br>
 
 ## Virtual Box Setup
@@ -138,12 +138,16 @@ If your join of your lab domain was successful, then you can log into your clien
 
 > ![usercreation](AD-Lab-Screenshots/GPOUserLoginClient.png)
 
+## Bulk User Creation
+
 ## Organizational Unit Creation
 Upon configuring the domain controller, I created an organizational unit to organize accounts:
 
     New-ADOrganizationalUnit 
     -Name "Users" 
     -Path "DC=lab,DC=local"
+
+## Security Grouping
 
 ## Group Policy Implementation:
 Group policies were created and linked to organizational units to control user behaviour.
@@ -190,7 +194,7 @@ When a user is placed inside an OU, any group policies associated to it are auto
   </tr>
 </table>
 
-## Password Reset Example
+## Common Administrative tasks
 A common help desk task in an Active Directory environment is resetting a user's password. The following is an example of this process:
 
     $securePass = Read-Host "Enter a secure password:" -AsSecureString
@@ -199,4 +203,4 @@ A common help desk task in an Active Directory environment is resetting a user's
     -Reset 
     -NewPassword $securePass
     
-
+## Common AD Troubleshoots
