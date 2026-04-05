@@ -134,18 +134,40 @@ Example user creation command:
 
 > ![usercreation](AD-Lab-Screenshots/pass%26usercreation.PNG)
 
+Passwords can be created and assigned to a user in the single user creation command.
+
+    New-ADUser
+    -Name "John Smith"
+    -GivenName "John"
+    -Surname "Smith"
+    -SamAccountName "jsmith"
+    -UserPrincipalName "jsmith@lab.local"
+    -Enabled $true
+    -AccountPassword (Read-Host -AsSecureString "Enter a password")
+    -Path "OU=Engineering,OU=Departments,DC=lab,DC=local"
+
 If your join of your lab domain was successful, then you can log into your client machine with the credentials of any account provisioned.
 
 > ![usercreation](AD-Lab-Screenshots/GPOUserLoginClient.png)
 
 ## Bulk User Creation
 
-## Organizational Unit Creation
-Upon configuring the domain controller, I created an organizational unit to organize accounts:
+## Organizational Unit (OU) Creation
+Upon configuring the domain controller, I created an OU to hold all user accounts for users in the domain:
 
     New-ADOrganizationalUnit 
     -Name "Users" 
     -Path "DC=lab,DC=local"
+
+You can place OUs in other OUs by prepending *OU=* to the -Path string. For example you might want to place an *Engineering* OU in a *Departments* OU.
+
+    New-ADOrganizationalUnit
+    -Name "Departments"
+    -Path "DC=lab,DC=local"
+
+    New-ADOrganizationalUnit
+    -Name "Engineering"
+    -Path "OU=Departments,DC=lab,DC=local"
 
 ## Security Grouping
 
