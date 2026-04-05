@@ -101,6 +101,7 @@ This change should now be reflected in the Network Settings (8 on SConfig)
 
 ## Connecting your Client Machine to your Domain Controller
 
+Now that we have configured our domain controller, we need to connect our client machine to it.
 _Walk through the process of connecting the client machine to the dc after configuring the dc and dns, then granting the windows 10 client internet access through the dc. This is arguably the most important part of this lab._
 
 ## Organizational Unit Creation
