@@ -161,13 +161,17 @@ Upon configuring the domain controller, I created an OU to hold all user account
 
 You can place OUs in other OUs by prepending *OU=* to the -Path string. For example you might want to place an *Engineering* OU in a *Departments* OU.
 
-    New-ADOrganizationalUnit
-    -Name "Departments"
-    -Path "DC=lab,DC=local"
+```powershell
+New-ADOrganizationalUnit
+-Name "Departments"
+-Path "DC=lab,DC=local"
+```
 
-    New-ADOrganizationalUnit
-    -Name "Engineering"
-    -Path "OU=Departments,DC=lab,DC=local"
+```powershell
+New-ADOrganizationalUnit
+-Name "Engineering"
+-Path "OU=Departments,DC=lab,DC=local"
+```
 
 ## Security Grouping
 
@@ -236,12 +240,16 @@ In enterprise environments, it is best practice to enforce password resets after
 
 While it is possible for an admin to manually reset a password from a DC, this is not best practice since it would involve the admin being aware of the user's password. As such the previous command can be preceded by a standard password reset command in the case that a user forgets their password. This would allow the user a temporary password with which to authenticate before changing their password at login. Since the previous command requires that the user know their current password.
 
-    Set-ADAccountPassword
-    -Identity "jsmith"
-    -Reset
-    -NewPassword (Read-Host -AsSecureString "Enter a temporary password")
+```powershell
+Set-ADAccountPassword
+-Identity "jsmith"
+-Reset
+-NewPassword (Read-Host -AsSecureString "Enter a temporary password")
+```
 
-    Set-ADUser
-    -Identity "jsmith"
-    -ChangePasswordAtLogon $true
+```powershell
+Set-ADUser
+-Identity "jsmith"
+-ChangePasswordAtLogon $true
+```
 ## Common AD Troubleshoots
