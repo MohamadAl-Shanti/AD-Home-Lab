@@ -222,7 +222,7 @@ When a user is placed inside an OU, any group policies associated to it are auto
 
 ## Common Administrative tasks
 
-# Password Reset
+### Password Reset
 A common help desk task in an Active Directory environment is resetting a user's password. The following is an example of this process:
 
     $securePass = Read-Host "Enter a secure password:" -AsSecureString
@@ -231,7 +231,7 @@ A common help desk task in an Active Directory environment is resetting a user's
     -Reset 
     -NewPassword $securePass
 
-# Password Rotation
+### Password Rotation
 In enterprise environments, it is best practice to enforce password resets after a set period of time (ex/30 days, 90 days, 1 year). In AD an admin can enforce a password reset upon a user's next login.
 
     Set-ADUser
