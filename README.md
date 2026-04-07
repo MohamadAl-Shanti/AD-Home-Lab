@@ -234,11 +234,13 @@ A common help desk task in an Active Directory environment is resetting a user's
 ### Password Rotation
 In enterprise environments, it is best practice to enforce password resets after a set period of time (ex/30 days, 90 days, 1 year). In AD an admin can enforce a password reset upon a user's next login.
 
+> ![policylinktoOU](AD-Lab-Screenshots/passwordRotation0.PNG)
+
     Set-ADUser
       -Identity "jsmith"
       -ChangePasswordAtLogon $true
 
-While it is possible for an admin to manually reset a password from a DC, this is not best practice since it would involve the admin being aware of the user's password. As such the previous command can be preceded by a standard password reset command in the case that a user forgets their password. This would allow the user a temporary password with which to authenticate before changing their password at login. Since the previous command requires that the user know their current password.
+While it is possible for an admin to manually reset a password from a DC, this is not best practice since it would involve the admin being aware of the user's password. As such the previous command can be preceded by a standard password reset command in the case that a user forgets their password. This would allow the user a temporary password with which to authenticate before changing their password at login, since the user must know their current password to go through the reset.
 
 ```powershell
 Set-ADAccountPassword
@@ -252,4 +254,9 @@ Set-ADUser
 -Identity "jsmith"
 -ChangePasswordAtLogon $true
 ```
+
+Now the user will be prompted to change their account the next time they want to log in.
+
+
+
 ## Common AD Troubleshoots
