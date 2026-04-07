@@ -234,7 +234,7 @@ A common help desk task in an Active Directory environment is resetting a user's
 ### Password Rotation
 In enterprise environments, it is best practice to enforce password resets after a set period of time (ex/30 days, 90 days, 1 year). In AD an admin can enforce a password reset upon a user's next login.
 
-> ![policylinktoOU](AD-Lab-Screenshots/passwordRotation0.PNG)
+> ![policylinktoOU](AD-Lab-Screenshots/passwordRotation0.png)
 
     Set-ADUser
       -Identity "jsmith"
@@ -257,6 +257,16 @@ Set-ADUser
 
 Now the user will be prompted to change their account the next time they want to log in.
 
+<table style="width:100%">
+  <tr>
+    <td width="50%"><img src="AD-Lab-Screenshots/passwordRotation1.png" alt="User Creation"></td>
+    <td width="50%"><img src="AD-Lab-Screenshots/passwordRotation2.png" alt="Policy Definition"></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="AD-Lab-Screenshots/passwordRotation3.png" alt="User Creation"></td>
+    <td width="50%"><img src="AD-Lab-Screenshots/passwordRotation4.png" alt="Policy Definition"></td>
+  </tr>
+</table>
 
 
 ## Common AD Troubleshoots
