@@ -152,6 +152,14 @@ If your join of your lab domain was successful, then you can log into your clien
 
 ## Bulk User Creation
 
+In situations where wants to create a large number of user accounts, say during employee onboarding, manually creating every user account with AD would be very time consuming. In AD you can make use of bulk user creation by writing account info to CSV format. 
+
+> ![usercreation](AD-Lab-Screenshots/writingtocsv1.png
+
+The format of the csv's lines is set in the first line. Each comma separated item within a line can be treated as a separate parameter. One line in users.csv for example contains a user's first name, last name, OU, etc, all as separate referenceable parameters. We can put these to use with a simple **for loop** to create multiple users in one command. We import the contents of the csv file into a string and then run our loop.
+
+> ![usercreation](AD-Lab-Screenshots/BulkUserCreation.png
+
 ## Organizational Unit (OU) Creation
 Upon configuring the domain controller, I created an OU to hold all user accounts for users in the domain:
 
