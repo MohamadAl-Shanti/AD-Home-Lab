@@ -154,13 +154,34 @@ If your join of your lab domain was successful, then you can log into your clien
 
 In situations where wants to create a large number of user accounts, say during employee onboarding, manually creating every user account with AD would be very time consuming. In AD you can make use of bulk user creation by writing account info to CSV format. 
 
+
 > ![usercreation](AD-Lab-Screenshots/writingtocsv1.png)
+
+While I tend to prefer writing to strings and then copying those strings to csv files, it is much easier to create a csv and then just write to it in notepad. Use the following command with your csv's path to open it up in notepad.
+
+```powershell
+notepad replace-with-your-file-path
+```
 
 The format of the csv's lines is set in the first line. Each comma separated item within a line can be treated as a separate parameter. One line in users.csv for example contains a user's first name, last name, OU, etc, all as separate referenceable parameters. We can put these to use with a simple **for loop** to create multiple users in one command. We import the contents of the csv file into a string and then run our loop.
 
+
 > ![usercreation](AD-Lab-Screenshots/BulkUserCreation.png)
 
-To make bulk user creation even more efficient, we can use a bit of scripting. We write all of these commands to a PowerShell Script file (ps1), so any time we want to use a csv to generate new user accounts we just need to execute this file.
+
+To make bulk user creation even more efficient, we can use a bit of **scripting**. We will write the commands to import the correct csv, generate a secure password, as well as the user creation loop to a string which we can then store in a PowerShell Script file (ps1). Storing these commands in a PowerShell script will allow us to automate the bulk creation process. Anytime we want to create a number of new user accounts via a csv we just need to execute this script.
+
+
+> ![usercreation](AD-Lab-Screenshots/bulkcreationscript.png)
+
+
+Now that we have a script, I would again recommend opening it up in notepad to verify that your syntax is correct, as it is easy to mess up when trying to write commands to a file through PowerShell, as you can see by the error message behind the notepad window lol.
+
+
+> ![usercreation](AD-Lab-Screenshots/editInNotepad.png)
+
+
+Once you have verified that your syntax is correct go ahead and create a fresh user's csv with unique users for whom their does not already exist an account. Run the script and enter your user csv path and your choice of a default password.
 
 
 
