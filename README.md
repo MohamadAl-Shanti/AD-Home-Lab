@@ -303,12 +303,8 @@ New-ADOrganizationalUnit
 -Path "OU=Departments,DC=lab,DC=local"
 ```
 
-## Security Grouping
-
-
-## Group Policy Implementation:
-Group policies were created and linked to organizational units to control user behaviour.
-Example: Restricting user access to the control panel:
+## Security Grouping and Group Policy Implementation:
+Group policies can be linked to organizational units to control user behaviour. For example, an organization might want to restrict user access to the control panel for those in the IT OU.
 
 1. Create the group policy:
 
@@ -350,6 +346,12 @@ When a user is placed inside an OU, any group policies associated to it are auto
     <td><img src="AD-Lab-Screenshots/PolicyActive2.png" alt="Policy Definition" width="100%"></td>
   </tr>
 </table>
+
+Applying GPOs to OUs is useful for applying general restrictions and enforcing least privilege to a department. There might, however, be situations in which restrictions are too stringent and a certain subset of a department are of a clearance level where they should not be subject to the restrictions. Take a hypothetical _Accounting_ OU. As a rule you may want to restrict employees within this department from changing their wallpaper. This is not necessarily a restriction you would want applied to senior employees. Rather than removing the policy all together, we make use of security groups.
+
+OUs and Security Groups are distinct in that an account can be a member of only one OU at that level of the OU hierarchy (ex/ marketing, IT, sales), but can be a member of many security groups. This allows for dynamic restriction and relaxation of policies to a user depending on the requirements of their specific role or any projects they may be a part of. By applying a GPO to a security group, you are redefining the policy's scope from every Authenticated User within an OU, to a smaller curated group of employees. An _Interns_ security group might contain employees from Marketing, Engineering, and IT, and by applying a GPO with its scope set to this group, we could effectively restrict only interns.
+
+Functionally these distinct AD components allow you to update access controls for a given user or given group of users without needing to go in and mess with the underlying policies that apply to the organization's core OUs.
 
 ## Common Administrative tasks
 
