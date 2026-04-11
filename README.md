@@ -22,14 +22,27 @@ Starting with the Windows 10 machine. Right click the machine in VirtualBox, nav
 </table>
 
 ## Useful Reference Images
-The majority of this lab's setup will refer to numbers on the SConfig screen, and there are steps throughout that will require you to authenticate via an authorized/administrator account. Feel free to refer to these images to make your life easier.
-> ![usercreation](AD-Lab-Screenshots/sconfig_screen.png)
-> ![usercreation](AD-Lab-Screenshots/AdminList&PassChange.png) <br>
+The majority of this lab's setup will refer to numbers on the SConfig screen. Feel free to refer to this image if you ever get confused when you see an instruction like "Select number 7".
 
+<table style="width:100%">
+  <tr>
+    <td><img src="AD-Lab-Screenshots/sconfig_screen.png" alt="User Creation" width="100%"></td>
+  </tr>
+</table>
+
+There are steps throughout the lab that will require you to authenticate via an authorized/administrator account. Particularly during domain controller configuration. Should this occur, select 15 in sconfig and refer to the following image and commmands to reset your administrator/authorized account's password.
+
+<table style="width:100%">
+  <tr>
+    <td><img src="AD-Lab-Screenshots/AdminList&PassChange.png" alt="User Creation" width="100%"></td>
+  </tr>
+</table>
+
+Locate your administrator account.
 ```powershell
 Get-ADGroupMember -Identity "Domain Admins" | Select-Object Name, SamAccountName
 ```
-Ensure the following two commands are run in the same session to preserve the $password variable
+Ensure the following two commands are run in the same session to preserve the $password variable. Set your password to something you will remember.
 
 ```powershell
 $password = Read-Host "Enter new password" AsSecureString
@@ -38,8 +51,12 @@ $password = Read-Host "Enter new password" AsSecureString
 Set-ADAccountPassword -Identity "Administrator" -NewPassword $password -Reset
 ```
 ## Active Directory Installation
-The following command should be used to install Active Directory and its services.
-> ![usercreation](AD-Lab-Screenshots/AD1_InstallADServices.png)
+The following command should be used to install Active Directory.
+<table style="width:100%">
+  <tr>
+    <td><img src="AD-Lab-Screenshots/AD1_InstallADServices.png" alt="User Creation" width="100%"></td>
+  </tr>
+</table>
 
 ```powershell
 Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
@@ -51,40 +68,76 @@ I configured the domain controller on Windows Server as follows:
   * **_Remote Desktop: Enabled_** - (SConfig - 7) Enter 'E' to enable remote desktop. Select the more secure option. Setting this is best practice for 
 system administration. Enabling Remote Desktop allows you to log into the domain controller and perform administrative tasks from Windows client machines.
   * **_Domain name - lab.local_** <br>
-  > ![usercreation](AD-Lab-Screenshots/AD_Domain_Naming_and_Updated_Packages.png)
+
+<table style="width:100%">
+  <tr>
+    <td><img src="AD-Lab-Screenshots/AD_Domain_Naming_and_Updated_Packages.png" alt="User Creation" width="100%"></td>
+  </tr>
+</table>
 
 ```powershell
 Install-ADDSForest -DomainName "lab.local" -ForestMode WinThreshold -DomainMode WinThreshold -InstallDNS:$true -Force
 ```
 
-This command is used to configure your domain as a forest with lab.local as the root domain. Your machine is no longer viewed as a standalone server, it is promoted to be the domain controller in a hierarchy of servers. This foundation allows for the future expansion into child domains such as dev.lab.local or marketing.lab.local to create a multi-domain tree. WinThreshold is not strictly necessary. It sets the domain's functional level to Windows Server 2016 ensuring that no feature incompatible with Windows Server 2016 or newer will be used. InstallDNS:$true installs the DNS server role, allowing you to configure your domain controller as a DNS server.
+This command is used to configure your domain as a forest with lab.local as the root domain. Your machine is no longer viewed as a standalone server, it is promoted to be the domain controller in a hierarchy of servers. 
+
+This foundation allows for the future expansion into child domains such as dev.lab.local or marketing.lab.local to create a multi-domain tree. WinThreshold is not strictly necessary. It sets the domain's functional level to Windows Server 2016 ensuring that no feature incompatible with Windows Server 2016 or newer will be used. InstallDNS:$true installs the DNS server role, allowing you to configure your domain controller as a DNS server.
 
 
 
-  You can now select 1 on the SConfig screen, and join the created domain as follows:
-  > ![usercreation](AD-Lab-Screenshots/domain_change.png)
-  * **_Computer name - ITDomainCont_**
-  Select 2 on SConfig and change the computer name as follows:
-  > ![usercreation](AD-Lab-Screenshots/image.png)
-  * **_Network Adapter Address & Preferred DNS Server_**
-    Select 8 on SConfig to configure the network addresses. There should be one network adapter present in the Network Settings, type 1 to select this adapter.
-  > ![usercreation](AD-Lab-Screenshots/network_settings1.png) 
+You can now select 1 on the SConfig screen, and join the created domain as follows:
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/domain_change.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
+  
+**_Computer name - ITDomainCont_**
+Select 2 on SConfig and change the computer name, you can choose any fitting name, for example *ITDomainCont*
+
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/image.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
+  
+**_Network Adapter Address & Preferred DNS Server_**
+Select 8 on SConfig to configure the network addresses. There should be one network adapter present in the Network Settings, type 1 to select this adapter.
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/network_settings1.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 The preferred DNS server will have been set to the loopback address during the installation of ADDSForest. This is what we want, as our domain controller acts as the DNS server for our entire network.
 
-  > ![usercreation](AD-Lab-Screenshots/network_adapter_settings.png)
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/network_adapter_settings.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 Select 1 on the Network Adapter Settings to set the Network adapter address.
 
-  > ![usercreation](AD-Lab-Screenshots/network_adapter_settings_filled2.png)
+
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/network_adapter_settings_filled2.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 First select Static IP address. Since this is the domain controller it is required that it be at a fixed IP address since it is a point of reference for the entire network. It is recommended that you use 172.16.0.1 for your static IP address. This is a private IPv4 address that is commonly used in internal LAN environments. You may leave the subnet mask and the default gateway blank. Leaving the subnet mask blank defaults to 255.255.255.0, defining the boundary of your network to 172.16.0.X
 
 I have found that the new IP address often does not stick, and that it is better to manually change it via PowerShell. If this is the case for you, you can change the static IP manually via PowerShell with the following commands:
 
-  > ![usercreation](AD-Lab-Screenshots/ipmanual.png)
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/ipmanual.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
-First get the correct Interface Alias: 
+
+First get the correct Interface Alias, in my case this is *Ethernet* 
 ```powershell
 Get-NetAdapter
 ```
@@ -97,13 +150,21 @@ New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 172.16.0.1 -PrefixLength 
 
 This change should now be reflected in the Network Settings (8 on SConfig)
 
-  > ![usercreation](AD-Lab-Screenshots/network_confirmation.png)
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/network_confirmation.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 ## Connecting your Client Machine to your Domain Controller
 
 Before we attemotNow that we have configured our domain controller, we need to join the domain we created with our Windows client. Log into the Windows 10 machine, navigate to _Network Status_ > _Change adapter options_ > _Ethernet_ > _Properties_. Select _Internet Protocol Version 4 (TCP/IPv4)_ and properties. Then configure _IP Address, Subnet Mask, and Preferred DNS Server_ as follows: 
 
-  > ![usercreation](AD-Lab-Screenshots/settingDNSforclient.png)
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/settingDNSforclient.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
   
   > IP address can be set to any IP in your range other than that of your DNS server, another option might be 172.16.0.102.
   
@@ -111,7 +172,11 @@ Before we attemotNow that we have configured our domain controller, we need to j
 
 Search for This PC and select properties. Scroll down and select _Rename this PC (advanced)_. Select _change_ and set the domain to the name of the domain you previously created via the domain controller (ex/ lab.local). With this you should have successfully joined the correct domain. You will be prompted to restart the computer to apply these changes.
 
-  > ![usercreation](AD-Lab-Screenshots/joindomainfinally.png)
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/joindomainfinally.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 We will further validate that our joining of the domain was successful in the following section.
 
@@ -132,7 +197,11 @@ Example user creation command:
     -AccountPassword $securePass 
     -Path "OU=Users,DC=lab,DC=local"
 
-> ![usercreation](AD-Lab-Screenshots/pass%26usercreation.PNG)
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/pass%26usercreation.PNG" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 Passwords can be created and assigned to a user in the single user creation command.
 
@@ -148,14 +217,22 @@ Passwords can be created and assigned to a user in the single user creation comm
 
 If your join of your lab domain was successful, then you can log into your client machine with the credentials of any account provisioned.
 
-> ![usercreation](AD-Lab-Screenshots/GPOUserLoginClient.png)
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/GPOUserLoginClient.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 ## Bulk User Creation
 
 In situations where wants to create a large number of user accounts, say during employee onboarding, manually creating every user account with AD would be very time consuming. In AD you can make use of bulk user creation by writing account info to CSV format. 
 
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/writingtocsv1.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
-> ![usercreation](AD-Lab-Screenshots/writingtocsv1.png)
 
 While I tend to prefer writing to strings and then copying those strings to csv files, it is much easier to create a csv and then just write to it in notepad. Use the following command with your csv's path to open it up in notepad.
 
@@ -166,24 +243,44 @@ notepad replace-with-your-file-path
 The format of the csv's lines is set in the first line. Each comma separated item within a line can be treated as a separate parameter. One line in users.csv for example contains a user's first name, last name, OU, etc, all as separate referenceable parameters. We can put these to use with a simple **for loop** to create multiple users in one command. We import the contents of the csv file into a string and then run our loop.
 
 
-> ![usercreation](AD-Lab-Screenshots/BulkUserCreation.png)
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/BulkUserCreation.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 
-To make bulk user creation even more efficient, we can use a bit of **scripting**. We will write the commands to import the correct csv, generate a secure password, as well as the user creation loop to a string which we can then store in a PowerShell Script file (ps1). Storing these commands in a PowerShell script will allow us to automate the bulk creation process. Anytime we want to create a number of new user accounts via a csv we just need to execute this script.
+To make bulk user creation even more efficient, we can use a bit of **scripting**. We will write the commands we need to create a set of users to a PowerShell Script file (ps1). This will allow us to automate the bulk creation process. Anytime we want to create a number of new user accounts via a csv we just need to execute this script. 
+
+I would again recommend typing up your script in notepad to verify that your syntax is correct, as it is easy to mess up when trying to write commands to a file through PowerShell, as you can see by the error message behind the notepad window lol.
 
 
-> ![usercreation](AD-Lab-Screenshots/bulkcreationscript.png)
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/editInNotepad.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 
-Now that we have a script, I would again recommend opening it up in notepad to verify that your syntax is correct, as it is easy to mess up when trying to write commands to a file through PowerShell, as you can see by the error message behind the notepad window lol.
+As you can see the above script allows you to enter the path to your users csv, then a secure default password. It then creates a user for every line of the csv, setting their password to the default, and requiring a password change on logon. Once you have verified that your syntax is correct go ahead and create a fresh user's csv with new user for whom you want to create the account. Run the script and enter your user csv path and your choice of a default password.
 
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/successfulbulkscript.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
-> ![usercreation](AD-Lab-Screenshots/editInNotepad.png)
+The users I created in newusers.csv were *user1, user2, & user3*. Should the script have been successful, they should appear listed upon running this command.
 
+```powershell
+Get-ADUser -Filter *
+```
 
-Once you have verified that your syntax is correct go ahead and create a fresh user's csv with unique users for whom their does not already exist an account. Run the script and enter your user csv path and your choice of a default password.
-
-
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/newusersfrombulk.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
 
 ## Organizational Unit (OU) Creation
 Upon configuring the domain controller, I created an OU to hold all user accounts for users in the domain:
@@ -207,6 +304,7 @@ New-ADOrganizationalUnit
 ```
 
 ## Security Grouping
+
 
 ## Group Policy Implementation:
 Group policies were created and linked to organizational units to control user behaviour.
