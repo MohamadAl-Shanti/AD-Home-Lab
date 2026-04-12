@@ -304,9 +304,9 @@ New-ADOrganizationalUnit
 ```
 
 ## Security Grouping and Group Policy Implementation:
-Group policies can be linked to organizational units to control user behaviour. For example, an organization might want to restrict user access to the control panel for those in the IT OU.
+Group Policiy Objects (GPOs) can be linked to organizational units to control user behaviour. For example, an organization might want to restrict user access to the control panel for those in the IT OU.
 
-1. Create the group policy:
+1. Create the GPO:
 
        New-GPO 
        -Name "IT-Admins-Policy" 
@@ -314,7 +314,7 @@ Group policies can be linked to organizational units to control user behaviour. 
    
 > ![policycreation](AD-Lab-Screenshots/GroupPolicyCreation.png)
        
-2. Define the group policy:
+2. Define the GPO:
    
        Set-GPRegistryValue 
        -Name "IT-Admins-Policy" 
@@ -324,21 +324,23 @@ Group policies can be linked to organizational units to control user behaviour. 
 
 > ![policydefinition](AD-Lab-Screenshots/GroupPolicyDefinition.png)
 
-    3. Link the policy to the desired OU:
+3. Link the GPO to the desired OU:
+
        New-GPLink 
        -Name "IT-Admins-Policy" 
        -Target "OU=IT,DC=lab,DC=local"
        
 > ![policylinktoOU](AD-Lab-Screenshots/GroupPolicyLinkToOU.png)
 
-    4. Adding a generic user to this OU enforces the policy on their account:
-         Move-ADObject 
-         -Identity "CN=LabUser4,CN=Users,DC=lab,DC=local" 
-         -TargetPath "OU=IT,DC=lab,DC=local"
+4. Adding a generic user to this OU enforces the policy on their account:
+         
+       Move-ADObject 
+       -Identity "CN=LabUser4,CN=Users,DC=lab,DC=local" 
+       -TargetPath "OU=IT,DC=lab,DC=local"
 
 > ![policylinktoOU](AD-Lab-Screenshots/MoveUserOU.PNG)
 
-When a user is placed inside an OU, any group policies associated to it are automatically applied to the user account. 
+When a user is placed inside an OU, any GPOs associated to it are automatically applied to the user account. 
 
 <table style="width:100%">
   <tr>
@@ -355,12 +357,37 @@ Functionally these distinct AD components allow you to update access controls fo
 
 The effectiveness of Security Groups for least privilege restrictions can be demonstrated with just three accounts. As an example let's say we have an Accounting Intern, an Engineering Intern, and an Engineering exec, and by default we apply a GPO that prevents members of the Engineering OU from updating their wallpaper. This restriction would affect both the engineering intern and the exec by default.
 
-<table style="width:100%">
-<tr>
-  <td><img src="AD-Lab-Screenshots/securitygroupaccs.png" alt="User Creation" width="100%"></td>
-</tr>
-</table>
+> ![policylinktoOU](AD-Lab-Screenshots/securitygroupaccs.png)
+> Account Creation: The GPO will first be applied to engineering, then will be applied only to an interns security group to demonstrate the power of security grouping.
 
+> ![policylinktoOU](AD-Lab-Screenshots/createenggpo.png)
+> ![policylinktoOU](AD-Lab-Screenshots/setenggpo.png)
+> ![policylinktoOU](AD-Lab-Screenshots/linkenggpo.png)
+> As before: Create the GPO, Define it, then link it to the OU
+
+If we decide we only want this GPO to apply to interns organization wide, we can do this by creating an _Interns Security Group_ and shiffting the policy from all Authenticated users in engineering, to interns exclusively. Applying GPOs to OUs is still valuable for some foundational restrictions but as stated before, a user can be member to one OU at a given level, but can be in several Security Groups.
+
+1. We can start by creating the Interns Security Group and adding the engineering and accounting interns to it.
+
+   ```powershell
+   New-ADGroup -Name "Interns" -GroupCategory Security -GroupScope Global -Path "DC=lab,DC=local"
+   ```
+
+   ```powershell
+   Add-ADGroupMember -Identity "Interns" -Members "engintern", "accintern"
+   ```
+
+2. Rather than removing the link between the policy and the Engineering OU entirely, we can just mute it such that it no longer applies to users. As you can see from the engineering exec, this policy no longer has any effect.
+
+   ```powershell
+   Set-GPPermissions -Name "Engineering-No-Wallpaper" -TargetName "Authenticated Users" -TargetType User -PermissionLevel None -Replace 
+   ```
+   
+3. We then apply the policy to the Interns security group, and voila, both interns regardless of OU are affected, and non-intern members of their OUs are not.
+
+   ```powershell
+   Set-GPPermissions -Name "Engineering-No-Wallpaper" -TargetName "Interns" -TargetType Group -PermissionLevel GpoApply
+   ```
 
 
 ## Common Administrative tasks
