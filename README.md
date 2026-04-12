@@ -365,9 +365,16 @@ The effectiveness of Security Groups for least privilege restrictions can be dem
 > ![policylinktoOU](AD-Lab-Screenshots/linkenggpo.png)
 > As before: Create the GPO, Define it, then link it to the OU
 
-If we decide we only want this GPO to apply to interns organization wide, we can do this by creating an _Interns Security Group_ and shiffting the policy from all Authenticated users in engineering, to interns exclusively. Applying GPOs to OUs is still valuable for some foundational restrictions but as stated before, a user can be member to one OU at a given level, but can be in several Security Groups.
+<table style="width:100%">
+  <tr>
+    <td><img src="AD-Lab-Screenshots/englogin.png" alt="User Creation" width="100%"></td>
+    <td><img src="AD-Lab-Screenshots/wallpaper_restriction.png" alt="Policy Definition" width="100%"></td>
+  </tr>
+</table>
 
-1. Let's start by removing the policy's link to the Engineering OU and applying it globally.
+The policy applies to Engineers regardless of position. If we only want this GPO to apply to interns organization wide, we can create an _Interns Security Group_ and shift the policy from all Authenticated users in engineering, to all interns in our domain. Applying GPOs to OUs is still valuable for some foundational restrictions, but security groups are very good since a user can be in several Security Groups.
+
+1. Let's start by removing the policy's link to the Engineering OU and applying it globally. At this point the GPO applies to every user in the domain.
 
     ```powershell
     Remove-GPLink -Name "Engineering-No-Wallpaper" -Target "OU=Engineering,DC=lab,DC=local"
@@ -387,7 +394,7 @@ If we decide we only want this GPO to apply to interns organization wide, we can
    Add-ADGroupMember -Identity "Interns" -Members "engintern", "accintern"
    ```
 
-2. We can mute the policy for all authenticated users such that it no longer affects any accounts.
+2. We can mute the policy for all authenticated users such that it no longer affects any accounts domain-wide.
 
    ```powershell
    Set-GPPermissions -Name "Engineering-No-Wallpaper" -TargetName "Authenticated Users" -TargetType User -PermissionLevel None -Replace 
@@ -399,6 +406,12 @@ If we decide we only want this GPO to apply to interns organization wide, we can
    Set-GPPermissions -Name "Engineering-No-Wallpaper" -TargetName "Interns" -TargetType Group -PermissionLevel GpoApply
    ```
 
+> ![policylinktoOU](AD-Lab-Screenshots/accinterngpo.png)
+> Policy active for accounting intern
+> ![policylinktoOU](AD-Lab-Screenshots/enginterngpo.png)
+> Policy active for engineering intern
+> ![policylinktoOU](AD-Lab-Screenshots/engexecgpo.png)
+> Policy filtered out and inactive for non interns
 
 ## Common Administrative tasks
 
@@ -447,6 +460,3 @@ Now the user will be prompted to change their account the next time they want to
     <td width="50%"><img src="AD-Lab-Screenshots/passwordRotation4.png" alt="Policy Definition"></td>
   </tr>
 </table>
-
-
-## Common AD Troubleshoots
