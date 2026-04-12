@@ -353,6 +353,16 @@ OUs and Security Groups are distinct in that an account can be a member of only 
 
 Functionally these distinct AD components allow you to update access controls for a given user or given group of users without needing to go in and mess with the underlying policies that apply to the organization's core OUs.
 
+The effectiveness of Security Groups for least privilege restrictions can be demonstrated with just three accounts. As an example let's say we have an Accounting Intern, an Engineering Intern, and an Engineering exec, and by default we apply a GPO that prevents members of the Engineering OU from updating their wallpaper. This restriction would affect both the engineering intern and the exec by default.
+
+<table style="width:100%">
+<tr>
+  <td><img src="AD-Lab-Screenshots/securitygroupaccs.png" alt="User Creation" width="100%"></td>
+</tr>
+</table>
+
+
+
 ## Common Administrative tasks
 
 ### Password Reset
