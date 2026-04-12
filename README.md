@@ -367,7 +367,17 @@ The effectiveness of Security Groups for least privilege restrictions can be dem
 
 If we decide we only want this GPO to apply to interns organization wide, we can do this by creating an _Interns Security Group_ and shiffting the policy from all Authenticated users in engineering, to interns exclusively. Applying GPOs to OUs is still valuable for some foundational restrictions but as stated before, a user can be member to one OU at a given level, but can be in several Security Groups.
 
-1. We can start by creating the Interns Security Group and adding the engineering and accounting interns to it.
+1. Let's start by removing the policy's link to the Engineering OU and applying it globally.
+
+    ```powershell
+    Remove-GPLink -Name "Engineering-No-Wallpaper" -Target "OU=Engineering,DC=lab,DC=local"
+    ```
+
+    ```powershell
+    New-GPLink -Name "Engineering-No-Wallpaper" -Target "DC=lab,DC=local"
+    ```
+    
+1. We will create the Interns Security Group and add the engineering and accounting interns to it.
 
    ```powershell
    New-ADGroup -Name "Interns" -GroupCategory Security -GroupScope Global -Path "DC=lab,DC=local"
@@ -377,7 +387,7 @@ If we decide we only want this GPO to apply to interns organization wide, we can
    Add-ADGroupMember -Identity "Interns" -Members "engintern", "accintern"
    ```
 
-2. Rather than removing the link between the policy and the Engineering OU entirely, we can just mute it such that it no longer applies to users. As you can see from the engineering exec, this policy no longer has any effect.
+2. We can mute the policy for all authenticated users such that it no longer affects any accounts.
 
    ```powershell
    Set-GPPermissions -Name "Engineering-No-Wallpaper" -TargetName "Authenticated Users" -TargetType User -PermissionLevel None -Replace 
