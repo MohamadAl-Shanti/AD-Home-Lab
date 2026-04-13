@@ -304,7 +304,9 @@ New-ADOrganizationalUnit
 ```
 
 ## Security Grouping and Group Policy Implementation:
-Group Policiy Objects (GPOs) can be linked to organizational units to control user behaviour. For example, an organization might want to restrict user access to the control panel for those in the IT OU.
+Group Policy Objects (GPOs) can be linked to OUs to control user behaviour.
+
+**Security Groups** are used to assign permissions and apply policies to specific collections of users across OUs.
 
 1. Create the GPO:
 
@@ -349,13 +351,20 @@ When a user is placed inside an OU, any GPOs associated to it are automatically 
   </tr>
 </table>
 
-Applying GPOs to OUs is useful for applying general restrictions and enforcing least privilege to a department. There might, however, be situations in which restrictions are too stringent and a certain subset of a department are of a clearance level where they should not be subject to the restrictions. Take a hypothetical _Accounting_ OU. As a rule you may want to restrict employees within this department from changing their wallpaper. This is not necessarily a restriction you would want applied to senior employees. Rather than removing the policy all together, we make use of security groups.
+Applying GPOs to OUs is useful for enforcing general restrictions at the department level. However, these restrictions can sometimes be too broad.
+For example, an Accounting OU might restrict users from changing their wallpaper. While appropriate for most employees, this restriction may not be suitable for senior staff.Instead of removing the policy entirely, Security Groups can be used to refine its scope.
 
-OUs and Security Groups are distinct in that an account can be a member of only one OU at that level of the OU hierarchy (ex/ marketing, IT, sales), but can be a member of many security groups. This allows for dynamic restriction and relaxation of policies to a user depending on the requirements of their specific role or any projects they may be a part of (what security groups they are a part of). By applying a GPO to a security group, you are redefining the policy's scope from targeting every Authenticated User within an OU, to targeting a smaller curated group of employees. An _Interns_ security group might contain employees from Marketing, Engineering, and IT, and by applying a GPO with its scope set to this group, we could effectively restrict only interns.
+OUs and Security Groups serve different purposes. A user belongs to one OU at a given level of the hierarchy, but can belong to multiple Security Groups.
+This allows policies to be applied broadly via OUs, then refined using Security Groups based on role or responsibilities.
 
-Functionally these distinct AD components allow you to update access controls for a given user or given group of users without needing to go in and mess with the underlying policies that apply to the organization's core OUs.
+Together, OUs and Security Groups allow administrators to adjust access control without modifying the underlying policies applied to the organization.
 
-The effectiveness of Security Groups for least privilege restrictions can be demonstrated with just three accounts. As an example let's say we have an Accounting Intern, an Engineering Intern, and an Engineering exec, and by default we apply a GPO that prevents members of the Engineering OU from updating their wallpaper. This restriction would affect both the engineering intern and the exec by default.
+The effectiveness of Security Groups can be demonstrated with three accounts:
+- Accounting Intern
+- Engineering Intern
+- Engineering Executive
+
+Assume a GPO is applied to the Engineering OU that prevents users from changing their wallpaper. By default, this affects both the intern and the executive.
 
 > ![policylinktoOU](AD-Lab-Screenshots/securitygroupaccs.png)
 > Account Creation: The GPO will first be applied to engineering, then will be applied only to an interns security group to demonstrate the power of security grouping.
