@@ -2,6 +2,8 @@
 This lab simulates a small enterprise Active Directory environment where users, organizational units, and group policies are managed using PowerShell. This repository documents the implementation of my Active Directory home lab, further details and screen captures can be found in the screenshots folder. I deployed Windows 10 and Windows Server virtual machines on Oracle VirtualBox using ISO installation images.
 <br>
 
+#### The Entra ID integration/extension is still at work and can be found at the bottom of the document for those interested
+
 ## Virtual Box Setup
 You can install VirtualBox here: https://www.virtualbox.org/wiki/Downloads <br>
 The installation is relatively straightforward, just select the exe for your operating system and follow the setup instructions provided.
@@ -469,3 +471,12 @@ Now the user will be prompted to change their account the next time they want to
     <td width="50%"><img src="AD-Lab-Screenshots/passwordRotation4.png" alt="Policy Definition"></td>
   </tr>
 </table>
+
+## Entra ID Integration
+
+### Tenant Creation and Azure AD Syncing
+
+1. Created a new tenant in Microsoft Entra Admin Center.
+   - Domain Name: adlabextension
+   - Resource Group: ad-lab-rg
+2. Installed Entra Connect to sync on prem AD environment with Entra
