@@ -479,4 +479,6 @@ Now the user will be prompted to change their account the next time they want to
 1. Created a new tenant in Microsoft Entra Admin Center.
    - Domain Name: adlabextension
    - Resource Group: ad-lab-rg
+   - Make sure it is internal
 2. Installed Entra Connect to sync on prem AD environment with Entra
+   - You will have the option to download cloud sync or connect sync. I chose connect sync to manage the lab on prem.
