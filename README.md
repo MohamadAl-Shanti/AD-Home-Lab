@@ -1,5 +1,5 @@
 # AD-Home-Lab
-This lab simulates a small enterprise Active Directory environment where users, organizational units, and group policies are managed using PowerShell. This repository documents the implementation of my Active Directory home lab, further details and screen captures can be found in the screenshots folder. I deployed Windows 10 and Windows Server virtual machines on Oracle VirtualBox using ISO installation images.
+This lab simulates an enterprise Active Directory environment where users, organizational units, and group policies are managed using PowerShell. This repository documents the implementation of my Active Directory home lab, further details and screen captures can be found in the screenshots folder. I deployed Windows 10 and Windows Server virtual machines on Oracle VirtualBox using ISO installation images.
 <br>
 
 #### The Entra ID integration/extension is still at work and can be found at the bottom of the document for those interested
