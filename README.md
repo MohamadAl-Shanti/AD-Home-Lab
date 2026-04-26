@@ -481,4 +481,7 @@ Now the user will be prompted to change their account the next time they want to
    - Resource Group: ad-lab-rg
    - Make sure it is internal
 2. Installed Entra Connect to sync on prem AD environment with Entra
+   - I recommend creating a Windows Server 2022 Desktop Experience VM for this installation/sync.
+   - If you do use Server 2022 Desktop Experience, ensure that IE Enhanced Security Configuration is turned off, otherwise you will not be able to correctly configure connect sync. You can do this through **Server Manager > Local Server > IE Enhanced Security Configuration**
    - You will have the option to download cloud sync or connect sync. I chose connect sync to manage the lab on prem.
+   - If you are using Window
