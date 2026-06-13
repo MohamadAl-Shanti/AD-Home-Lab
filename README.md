@@ -484,4 +484,6 @@ Now the user will be prompted to change their account the next time they want to
    - I recommend creating a Windows Server 2022 Desktop Experience VM for this installation/sync.
    - If you do use Server 2022 Desktop Experience, ensure that IE Enhanced Security Configuration is turned off, otherwise you will not be able to correctly configure connect sync. You can do this through **Server Manager > Local Server > IE Enhanced Security Configuration**
    - You will have the option to download cloud sync or connect sync. I chose connect sync to manage the lab on prem.
-   - If you are using Window
+   - **This did not work for me, I could not download connect sync on my Windows Server Desktop Experience VM on VirtualBox. Not 100% sure if this is due to VirtualBox limitations.
+  
+### Next Step: Provision users on azure.com, test accounts on Azure VM.
