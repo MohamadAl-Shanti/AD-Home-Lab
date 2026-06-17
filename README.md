@@ -487,3 +487,12 @@ Now the user will be prompted to change their account the next time they want to
    - **This did not work for me, I could not download connect sync on my Windows Server Desktop Experience VM on VirtualBox. Not 100% sure if this is due to VirtualBox limitations.
   
 ### Next Step: Provision users on azure.com, test accounts on Azure VM.
+
+This section of the lab will approach simulating an enterprise IT infrastructure a little differently. Rather than syncing with an on premises AD forest, all user accounts will be provioned through the online azure portal. Day to day sysadmin tasks such as password resets, basic IAM controls, and role assignments will all be done online as well. The success of these admin tasks will be verified using an Azure Virtual Machine with RDP (Remote Desktop Protocol).
+
+1. Go to azure.microsoft.com:
+   - Select _Get Started with Azure_
+   - To do all of the steps in this lab you will need to subscribe to microsoft business premium which is pricey, but there should be free trial options.
+2. Sign in on portal.azure.com
+   - Locate Virtual Machines using the search bar. __Create VM LOOOOOOOOL__
+   
