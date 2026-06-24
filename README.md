@@ -507,4 +507,7 @@ This section of the lab will approach simulating an enterprise IT infrastructure
    -  Rather than opening the rdp file from your downloads, in your windows search bar, locate mstsc.exe.
    -  In the Computer Name box, enter the name you assigned to your virtual machine.
    -  Select 'More Options' and check 'Use a web account to sign in to the remote computer'
-   -  Press connect, sign in with your user's UPN
+5. Select Access Control (IAM) from the left sidebar.
+   - Select 'Add Role Assignment'
+   - Depending on the access level you want to grant a user, search for either 'Virtual Machine Administrator Login' or 'Virtual Machine User Login'. Under the Members section, add the user you want to grant access to the VM to.
+6. You can now open mstsc.exe and connect. Just ensure the VM is powered on.
