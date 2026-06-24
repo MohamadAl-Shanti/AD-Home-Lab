@@ -486,28 +486,30 @@ Now the user will be prompted to change their account the next time they want to
    - You will have the option to download cloud sync or connect sync. I chose connect sync to manage the lab on prem.
    - **This did not work for me, I could not download connect sync on my Windows Server Desktop Experience VM on VirtualBox. Not 100% sure if this is due to VirtualBox limitations.
   
-### Next Step: Provision users on azure.com, test accounts on Azure VM.
+### Next Step: Provision users on entra.microsoft.com, test accounts on Azure VM.
 
-This section of the lab will approach simulating an enterprise IT infrastructure a little differently. Rather than syncing with an on premises AD forest, all user accounts will be provioned through the online azure portal. Day to day sysadmin tasks such as password resets, basic IAM controls, and role assignments will all be done online as well. The success of these admin tasks will be verified using an Azure Virtual Machine with RDP (Remote Desktop Protocol).
+This section of the lab will approach simulating an enterprise IT infrastructure a little differently. Rather than syncing with an on premises AD forest, all user accounts will be provisioned online through entra.microsoft.com. Day to day sysadmin tasks such as user and bulk user creation, password resets, MFA enforcement, basic IAM controls, and role assignments, will all be done online. The success of these admin tasks will be verified using an Azure Virtual Machine with RDP (Remote Desktop Protocol).
 
-1. Go to azure.microsoft.com:
-   - Select _Get Started with Azure_
-   - To do all of the steps in this lab you will need to subscribe to microsoft business premium which is pricey, but there should be free trial options.
-2. Sign in on portal.azure.com
-3. Locate Virtual Machines using the search bar. Select create and configure a basic windows 10 or 11 VM.
+### Next Step: Provision users on entra.microsoft.com, test accounts on Azure VM.
+
+This section of the lab will approach simulating an enterprise IT infrastructure a little differently. Rather than syncing with an on premises AD forest, all user accounts will be provisioned online through entra.microsoft.com. Day to day sysadmin tasks such as user and bulk user creation, password resets, MFA enforcement, basic IAM controls, and role assignments, will all be done online. The success of these admin tasks will be verified using an Azure Virtual Machine with RDP (Remote Desktop Protocol).
+
+1. Go to entra.microsoft.com:
+   - To do all of the steps in this lab you will need to subscribe to Microsoft Business Premium, which is pricey, but there should be free trial options.
+2. When you have created your account and signed in, go to portal.azure.com and locate Virtual Machines using the search bar. Select create and configure a basic Windows 10 or 11 VM.
    - When your VM is created you must download the RDP file.
    - During initial configuration of the VM, make sure to allow RDP (port 3389) from your home IP as a source. This will allow you to remotely access the machine from your computer.
-4. We must take some steps to be able to access the VM.
+3. We must take some steps to be able to access the VM.
    - Collect the VM's public IP from the Azure Portal.
-   - Locate your hosts file, and append the following line to the end of the file
+   - Locate your hosts file, and append the following line to the end of the file:
    ```
    [Virtual Machine Public IP]    [Virtual Machine Name]
    ```
-   -  This maps your virtual machine's given name to its public IP, allowing you to access the VM from your computer.
-   -  Rather than opening the rdp file from your downloads, in your windows search bar, locate mstsc.exe.
-   -  In the Computer Name box, enter the name you assigned to your virtual machine.
-   -  Select 'More Options' and check 'Use a web account to sign in to the remote computer'
-5. Select Access Control (IAM) from the left sidebar.
-   - Select 'Add Role Assignment'
+   - This maps your virtual machine's given name to its public IP, allowing you to access the VM from your computer.
+   - Rather than opening the RDP file from your downloads, in your Windows search bar, locate mstsc.exe.
+   - In the Computer Name box, enter the name you assigned to your virtual machine.
+   - Select 'More Options' and check 'Use a web account to sign in to the remote computer'.
+4. Select Access Control (IAM) from the left sidebar (on the VM's page in the Azure Portal).
+   - Select 'Add Role Assignment'.
    - Depending on the access level you want to grant a user, search for either 'Virtual Machine Administrator Login' or 'Virtual Machine User Login'. Under the Members section, add the user you want to grant access to the VM to.
-6. You can now open mstsc.exe and connect. Just ensure the VM is powered on.
+5. You can now open mstsc.exe and connect. Just ensure the VM is powered on.
