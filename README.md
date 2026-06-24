@@ -494,5 +494,5 @@ This section of the lab will approach simulating an enterprise IT infrastructure
    - Select _Get Started with Azure_
    - To do all of the steps in this lab you will need to subscribe to microsoft business premium which is pricey, but there should be free trial options.
 2. Sign in on portal.azure.com
-   - Locate Virtual Machines using the search bar. __Create VM LOOOOOOOOL__
+   - Locate Virtual Machines using the search bar. Select create and configure a basic windows 10 or 11 VM.
    
