@@ -494,5 +494,17 @@ This section of the lab will approach simulating an enterprise IT infrastructure
    - Select _Get Started with Azure_
    - To do all of the steps in this lab you will need to subscribe to microsoft business premium which is pricey, but there should be free trial options.
 2. Sign in on portal.azure.com
-   - Locate Virtual Machines using the search bar. Select create and configure a basic windows 10 or 11 VM.
-   
+3. Locate Virtual Machines using the search bar. Select create and configure a basic windows 10 or 11 VM.
+   - When your VM is created you must download the RDP file.
+   - During initial configuration of the VM, make sure to allow RDP (port 3389) from your home IP as a source. This will allow you to remotely access the machine from your computer.
+4. We must take some steps to be able to access the VM.
+   - Collect the VM's public IP from the Azure Portal.
+   - Locate your hosts file, and append the following line to the end of the file
+   ```
+   [Virtual Machine Public IP]    [Virtual Machine Name]
+   ```
+   -  This maps your virtual machine's given name to its public IP, allowing you to access the VM from your computer.
+   -  Rather than opening the rdp file from your downloads, in your windows search bar, locate mstsc.exe.
+   -  In the Computer Name box, enter the name you assigned to your virtual machine.
+   -  Select 'More Options' and check 'Use a web account to sign in to the remote computer'
+   -  Press connect, sign in with your user's UPN
