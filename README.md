@@ -485,10 +485,6 @@ Now the user will be prompted to change their account the next time they want to
    - If you do use Server 2022 Desktop Experience, ensure that IE Enhanced Security Configuration is turned off, otherwise you will not be able to correctly configure connect sync. You can do this through **Server Manager > Local Server > IE Enhanced Security Configuration**
    - You will have the option to download cloud sync or connect sync. I chose connect sync to manage the lab on prem.
    - **This did not work for me, I could not download connect sync on my Windows Server Desktop Experience VM on VirtualBox. Not 100% sure if this is due to VirtualBox limitations.
-  
-### Next Step: Provision users on entra.microsoft.com, test accounts on Azure VM.
-
-This section of the lab will approach simulating an enterprise IT infrastructure a little differently. Rather than syncing with an on premises AD forest, all user accounts will be provisioned online through entra.microsoft.com. Day to day sysadmin tasks such as user and bulk user creation, password resets, MFA enforcement, basic IAM controls, and role assignments, will all be done online. The success of these admin tasks will be verified using an Azure Virtual Machine with RDP (Remote Desktop Protocol).
 
 ### Next Step: Provision users on entra.microsoft.com, test accounts on Azure VM.
 
@@ -513,3 +509,10 @@ This section of the lab will approach simulating an enterprise IT infrastructure
    - Select 'Add Role Assignment'.
    - Depending on the access level you want to grant a user, search for either 'Virtual Machine Administrator Login' or 'Virtual Machine User Login'. Under the Members section, add the user you want to grant access to the VM to.
 5. You can now open mstsc.exe and connect. Just ensure the VM is powered on.
+
+### Admin Tasks
+1. Assigning own Required Permissions 
+2. (Bulk) User Creation
+3. MFA Enforcement
+4. Using Audit and Sign-in logs
+5. Editing User Settings
