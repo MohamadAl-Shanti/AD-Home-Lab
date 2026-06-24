@@ -510,9 +510,10 @@ This section of the lab will approach simulating an enterprise IT infrastructure
    - Depending on the access level you want to grant a user, search for either 'Virtual Machine Administrator Login' or 'Virtual Machine User Login'. Under the Members section, add the user you want to grant access to the VM to.
 5. You can now open mstsc.exe and connect. Just ensure the VM is powered on.
 
-### Admin Tasks
+### Next Step: Admin Tasks
 1. Assigning own Required Permissions 
 2. (Bulk) User Creation
+   - 
 3. MFA Enforcement
 4. Using Audit and Sign-in logs
 5. Editing User Settings
