@@ -511,9 +511,9 @@ This section of the lab will approach simulating an enterprise IT infrastructure
 5. You can now open mstsc.exe and connect. Just ensure the VM is powered on.
 
 ### Next Step: Admin Tasks
-1. Assigning own Required Permissions 
+1. Assigning own Required Permissions: Assign the 'User Administrator' role assignment to the account you will use to perform any bulk operations. Refer to Section 4. The process is almost identical through entra.microsoft.com as through the azure portal.
 2. (Bulk) User Creation
-   - 
-3. MFA Enforcement
-4. Using Audit and Sign-in logs
-5. Editing User Settings
+   Select 'Bulk Operations'. You will be provided with a CSV template with a sample user's attributes, comma separated, line separated per user. Examples of some of these attributes are UPN, password, and account enablement status. Follow the template and write as many users as you need onto the file in any text editor. Upload the updated file and the users will be created automatically.
+4. MFA Enforcement
+5. Using Audit and Sign-in logs
+6. Editing User Settings
